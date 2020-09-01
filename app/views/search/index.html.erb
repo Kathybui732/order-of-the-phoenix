@@ -2,7 +2,8 @@
 
 <p>Number of members: <%= @members.size %></p>
 
-<% @members.each do |member| %>
+<section class="members">
+  <% @members.each do |member| %>
   <section class="members-<%= member.id %>">
     Name: <%= member.name %><br>
     Role: <%= member.role %><br>
@@ -10,4 +11,5 @@
     Patronus: <%= member.patronus %><br>
     <br>
   </section>
-<% end %>
+  <% end %>
+</section>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Find feature for all the members of house Gryffindor' do
   describe 'As a user' do
-    it "displays all of member's names, role, house, and patronus", :vcr do
+    it "displays all of member's names, role, house, and patronus" do
       visit root_path
       select "Gryffindor", from: :house
       click_on "Search For Members"

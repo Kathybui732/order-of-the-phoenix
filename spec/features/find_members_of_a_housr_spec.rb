@@ -11,9 +11,16 @@ RSpec.describe 'Find feature for all the members of house Gryffindor', :vcr do
       members = json.map do |data|
         Member.new(data)
       end
+
+      not_gryffindor = members.find do |faker|
+        faker.id == '5a1223ed0f5ae10021650d70'
+      end
+
       gryffindor_members = members.select do |member|
         member.house == "Gryffindor"
       end
+
+      gryffindor_members.delete(not_gryffindor)
 
       visit root_path
       select "Gryffindor", from: :house
@@ -22,7 +29,7 @@ RSpec.describe 'Find feature for all the members of house Gryffindor', :vcr do
       expect(page).to have_content('Number of members: 40')
 
       gryffindor_members.each do |member|
-        within('.members') do
+        within(".members-#{member.id}") do
           expect(page).to have_content(member.name)
           expect(page).to have_content(member.role)
           expect(page).to have_content(member.house)
